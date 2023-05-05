@@ -5,9 +5,12 @@
  * Plugin URI: https://visibleone.com
  * Description: This plugin gives you the ability to modify the logo that appears when you log in to WordPress from a media file, and it also gives you the option to use a remote URL.
  * Author: Conor Visibee <Chen Lay>
- * Version: 1.1.0
- * Requires at least: 5.6
+ * Version: 1.1.1
+ * Requires at least: 5.0
  * Tested up to: 6.2
+ * Requires PHP: 5.6.20
+ * This plugin requires PHP 5.6.20 or higher to run properly.
+ * It is recommended to use a PHP version of at least 7.4 for security reasons.
  */
 
 defined('ABSPATH') or die('No direct script access allowed!');
@@ -32,8 +35,44 @@ class VO_Login_Logo
             wp_enqueue_media();
             wp_enqueue_script('jquery');
         });
+        // Set default logo
+        $this->set_default_logo();
     }
 
+    // Set default logo
+    public function set_default_logo()
+    {
+        $default_logo = array(
+            'url' => '',
+            'id' => 0
+        );
+
+        $logo_id = get_option('vo_login_logo_id');
+        $logo_url = esc_url(get_option('vo_login_logo_url'));
+
+        if (!$logo_id && !$logo_url) {
+            // Set default logo to use when neither logo ID nor URL is provided
+            $default_logo_id = get_option('thumbnail_id');
+            $default_logo_src = wp_get_attachment_image_src($default_logo_id, 'full');
+            $default_logo['url'] = $default_logo_src[0];
+            $default_logo['id'] = $default_logo_id;
+
+            // Save default logo settings
+            update_option('vo_login_logo_id', $default_logo['id']);
+            update_option('vo_login_logo_url', $default_logo['url']);
+        } elseif ($logo_id && !$logo_url) {
+            // Set default logo URL to use when only logo ID is provided
+            $logo_src = wp_get_attachment_image_src($logo_id, 'full');
+            $logo_url = $logo_src[0];
+            update_option('vo_login_logo_url', $logo_url);
+        } elseif (!$logo_id && $logo_url) {
+            // Set default logo ID to use when only logo URL is provided
+            $attachment_id = attachment_url_to_postid($logo_url);
+            if ($attachment_id) {
+                update_option('vo_login_logo_id', $attachment_id);
+            }
+        }
+    }
 
     // Add custom logo to login page
     public function vo_custom_login_logo()
