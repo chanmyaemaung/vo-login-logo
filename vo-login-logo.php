@@ -5,7 +5,7 @@
  * Plugin URI: https://visibleone.com
  * Description: This plugin gives you the ability to modify the logo that appears when you log in to WordPress from a media file, and it also gives you the option to use a remote URL.
  * Author: Conor Visibee <Chen Lay>
- * Version: 1.1.2
+ * Version: 1.1.1
  * Requires at least: 5.0
  * Tested up to: 6.2
  * Requires PHP: 5.6.20
