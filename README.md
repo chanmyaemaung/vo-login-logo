@@ -5,7 +5,7 @@ The VO Login Logo plugin enables you to modify the WordPress login logo using a 
 ## Plugin Settings Preview
 
 <div id="plugin-settings-preview">
-    <img src="https://i.imgur.com/NERQOP1.png" alt="Plugin Settings Preview" width="100%">
+    <img src="https://i.imgur.com/NFRcRmM.png" alt="Plugin Settings Preview" width="100%">
 </div>
 
 ## Features
