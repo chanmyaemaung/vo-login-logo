@@ -5,7 +5,7 @@
  * Plugin URI: https://visibleone.com
  * Description: This plugin gives you the ability to modify the logo that appears when you log in to WordPress from a media file, and it also gives you the option to use a remote URL.
  * Author: Conor Visibee <Chen Lay>
- * Version: 1.1.1
+ * Version: 1.1.2
  * Requires at least: 5.0
  * Tested up to: 6.2
  * Requires PHP: 5.6.20
@@ -128,22 +128,26 @@ class VO_Login_Logo
     public function vo_login_logo_settings_page()
     {
         $current_version = get_plugin_data(__FILE__)['Version'];
+        $githubLink = 'https://bit.ly/42oxBI2';
 ?>
-        <div class="wrap">
-            <h2>VO Login Logo Settings</h2>
-            <p>This plugin was crafted by Conor Visibee &lt;Chen Lay&gt; at <a href="https://visibleone.com/" target="_blank">Visible One</a>.</p>
-            <p>Current version: <?php echo $current_version; ?></p>
+        <div class="voWrap">
+            <h1 class="voTitle">VO Login Logo Settings</h1>
+            <p class="voSubtitle">This plugin was crafted by <span class="author">Conor</span> at <a href="https://visibleone.com/" target="_blank" class="company">Visible One</a>.</p>
+            <p class="version">
+                <span>Current version: <?php echo $current_version; ?></span>
+                <a href="<?php echo $githubLink; ?>" target="_blank" class="voDownload">Download Plugin ♺</a>
+            </p>
             <form method="post" action="options.php">
                 <?php settings_fields('vo_login_logo_settings_group'); ?>
                 <?php do_settings_sections('vo_login_logo_settings_group'); ?>
                 <table class="form-table">
                     <tr valign="top">
                         <th scope="row">Logo Remote URL:</th>
-                        <td><input type="text" name="vo_login_logo_url" value="<?php echo esc_attr(get_option('vo_login_logo_url')); ?>" /></td>
+                        <td><input type="text" name="vo_login_logo_url" placeholder="Insert your image url" value="<?php echo esc_attr(get_option('vo_login_logo_url')); ?>" /></td>
                     </tr>
                     <tr valign="top">
                         <th scope="row">Logo Link:</th>
-                        <td><input type="text" name="vo_login_logo_link" value="<?php echo esc_attr(get_option('vo_login_logo_link')); ?>" /></td>
+                        <td><input type="text" name="vo_login_logo_link" placeholder="Add your redirect link" value="<?php echo esc_attr(get_option('vo_login_logo_link')); ?>" /></td>
                     </tr>
                     <tr valign="top">
                         <th scope="row">Upload or Select Logo:</th>
@@ -222,8 +226,36 @@ class VO_Login_Logo
         </script>
 
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+            .voWrap {
+                font-family: 'Poppins', sans-serif;
+                border: 1px solid #fff3d9;
+                border-radius: 20px;
+                background: white;
+                max-width: 500px;
+                width: 100%;
+                padding: 1.5rem;
+                -webkit-box-shadow: 1px 2px 5px #00db92;
+                box-shadow: 1px 2px 5px #00db92;
+                margin: 2rem auto;
+            }
+
+            .voWrap h1 {
+                font-weight: 700;
+            }
+
+            .voWrap p {
+                color: #212121;
+                font-weight: 400;
+            }
+
             .vo-upload-wrap .vo-button-wrap {
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
                 align-items: center;
             }
 
@@ -233,6 +265,166 @@ class VO_Login_Logo
 
             .vo-preview-image {
                 margin-top: 1rem;
+            }
+
+            .voTitle {
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+
+            .voSubtitle {
+                font-size: 1rem;
+            }
+
+            .author {
+                color: #ffae00;
+                font-weight: bold;
+                -webkit-transition: all 300ms ease-in;
+                -o-transition: all 300ms ease-in;
+                transition: all 300ms ease-in;
+            }
+
+            .author:hover {
+                color: #00db92;
+            }
+
+            .company {
+                color: #00db92;
+                font-weight: bold;
+                text-decoration: none;
+                -webkit-transition: all 300ms ease-in;
+                -o-transition: all 300ms ease-in;
+                transition: all 300ms ease-in;
+            }
+
+            .company:hover {
+                color: #ffae00;
+            }
+
+            .form-table th {
+                font-size: 1rem;
+                font-weight: 500;
+            }
+
+            #submit {
+                background-color: #00db92;
+                padding: 5px 15px;
+                border: none;
+                border-radius: 5px;
+                -webkit-box-shadow: 1px 1px 5px #ffae00;
+                box-shadow: 1px 1px 5px #ffae00;
+                border: 1px solid #00db92;
+                -webkit-transition: all 300ms ease-in;
+                -o-transition: all 300ms ease-in;
+                transition: all 300ms ease-in;
+            }
+
+            #submit:hover {
+                background: transparent;
+                color: #212121;
+                border-color: #ffae00;
+            }
+
+            p.version {
+                color: #7c7c7c;
+                font-size: 0.75rem;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+            }
+
+            p.version a.voDownload {
+                text-decoration: none;
+                font-weight: 700;
+                color: #00db92;
+                margin-right: 10px;
+            }
+
+            #vo-upload-logo-btn,
+            .vo-upload-wrap .vo-button-wrap .vo-remove-button button {
+                padding: 5px 10px;
+                color: white;
+                border: none;
+                -webkit-transition: all 300ms ease-in;
+                -o-transition: all 300ms ease-in;
+                transition: all 300ms ease-in;
+            }
+
+            .vo-upload-wrap .vo-button-wrap .vo-remove-button button {
+                border: 1px solid #d81f18;
+            }
+
+            .vo-button-wrap .vo-remove-button button:hover {
+                background-color: transparent !important;
+                color: #212121;
+            }
+
+            #vo-upload-logo-btn {
+                background-color: #ffae00;
+                border: 1px solid #ffae00;
+                -webkit-transition: all 300ms ease-in;
+                -o-transition: all 300ms ease-in;
+                transition: all 300ms ease-in;
+            }
+
+            #vo-upload-logo-btn:hover {
+                background-color: transparent;
+                color: #212121;
+            }
+
+            .vo-upload-wrap .vo-button-wrap .vo-remove-button button {
+                background-color: #d81f18;
+            }
+
+
+            .vo-preview-image {
+                margin-top: 2rem;
+            }
+
+            .vo-preview-image img {
+                width: 100%;
+                -webkit-box-shadow: 1px 0 5px #ffae00;
+                box-shadow: 1px 0 5px #ffae00;
+                -o-object-fit: cover;
+                object-fit: cover;
+                aspect-ratio: 16/9;
+                border-radius: 5px;
+            }
+
+            .form-table th {
+                font-weight: 500;
+            }
+
+            .form-table td input {
+                padding: 5px 10px;
+                border: 1px solid #ffae00;
+                -webkit-box-shadow: 1px 1px 3px #ffae00;
+                box-shadow: 1px 1px 3px #ffae00;
+                -webkit-transition: all 300ms ease-in;
+                -o-transition: all 300ms ease-in;
+                transition: all 300ms ease-in;
+            }
+
+            .form-table td input:focus {
+                border-color: #00db92;
+                border: 1px solid #00db92;
+                -webkit-box-shadow: 1px 1px 3px #00db92;
+                box-shadow: 1px 1px 3px #00db92;
+            }
+
+            .form-table td input {
+                width: 100%;
+            }
+
+            .wp-core-ui .button-primary:focus {
+                -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 3px #ffae00;
+                box-shadow: 0 0 0 1px #fff, 0 0 0 3px #ffae00;
             }
         </style>
 
