@@ -1,0 +1,3 @@
+<?php
+
+// Slient is golden
