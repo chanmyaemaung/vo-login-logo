@@ -14,7 +14,7 @@ The VO Login Logo plugin enables you to modify the WordPress login logo using a 
 - Choose between uploading a logo from your media library or using a remote URL.
 - Simple and user-friendly interface.
 - Compatible with all WordPress versions tested up to 6.2.
-- Developed by Chen Lay ([Conor](https://www.facebook.com/mynameischen)).
+- Developed by Chen Lay ([Conor](https://mm.linkedin.com/in/chenlay)).
 - Open source project - anyone can use, download, modify, contribute to, and distribute the plugin free of charge.
 
 ## Installation
@@ -35,7 +35,7 @@ Congratulations! You have successfully customized your WordPress login logo usin
 
 ## Support
 
-If you encounter any issues while using the VO Login Logo plugin, don't hesitate to contact me at info@chanmyaemaung.net. I'll be happy to assist you.
+If you encounter any issues while using the VO Login Logo plugin, don't hesitate to contact me at mr.chenlay@gmail.com. I'll be happy to assist you.
 
 ## Contribute
 
